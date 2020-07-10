@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.masoud.apigatewayserver</groupId>
+    <artifactId>gateway</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>gateway</name>
+    <description>api gateway server with netflix zuul</description>
+
+    <parent>
+        <groupId>com.masoud</groupId>
+        <artifactId>spring-cloud-project</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>${jib-maven-plugin.version}</version>
+                    <configuration>
+                        <from>
+                            <image>adoptopenjdk:11-jre-hotspot</image>
+                        </from>
+                        <to>
+                            <image>gateway:latest</image>
+                        </to>
+                        <container>
+                            <entrypoint>
+                                <shell>bash</shell>
+                                <option>-c</option>
+                                <arg>/entrypoint.sh</arg>
+                            </entrypoint>
+                            <ports>
+                                <port>8765</port>
+                            </ports>
+                            <environment>
+                                <SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
+                            </environment>
+                            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+                        </container>
+                        <extraDirectories>
+                            <paths>src/main/jib</paths>
+                            <permissions>
+                                <permission>
+                                    <file>/entrypoint.sh</file>
+                                    <mode>755</mode>
+                                </permission>
+                            </permissions>
+                        </extraDirectories>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

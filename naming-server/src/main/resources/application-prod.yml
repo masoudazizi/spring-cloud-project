@@ -1,0 +1,13 @@
+eureka:
+  instance:
+    hostname: naming-server
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://naming-server:${server.port}/eureka/
+
+logging:
+  level:
+    ROOT: INFO
+    com.masoud.namingserver: INFO

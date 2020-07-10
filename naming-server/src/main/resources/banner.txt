@@ -1,0 +1,8 @@
+${AnsiColor.RED},--.  ,--.                     ,--.                 ${AnsiColor.CYAN}    ,---.
+${AnsiColor.RED}|  ,'.|  |  ,--,--. ,--,--,--. `--' ,--,--,   ,---. ${AnsiColor.CYAN}   '   .-'   ,---.  ,--.--. ,--.  ,--.  ,---.  ,--.--.
+${AnsiColor.RED}|  |' '  | ' ,-.  | |        | ,--. |      \ | .-. |${AnsiColor.CYAN}   `.  `-.  | .-. : |  .--'  \  `'  /  | .-. : |  .--'
+${AnsiColor.RED}|  | `   | \ '-'  | |  |  |  | |  | |  ||  | ' '-' '${AnsiColor.CYAN}   .-'    | \   --. |  |      \    /   \   --. |  |
+${AnsiColor.RED}`--'  `--'  `--`--' `--`--`--' `--' `--''--' .`-  / ${AnsiColor.CYAN}   `-----'   `----' `--'       `--'     `----' `--'
+                                             `---'
+${AnsiColor.BRIGHT_BLUE}:: Mobilab :: Running Spring Boot ${spring-boot.version} :: starting
+

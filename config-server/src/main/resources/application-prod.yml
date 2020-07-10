@@ -1,0 +1,13 @@
+eureka:
+  instance:
+    hostname: config-server
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://naming-server:8761/eureka/
+
+logging:
+  level:
+    ROOT: INFO
+    com.masoud.accountmanagement: INFO

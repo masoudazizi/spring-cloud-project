@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+
+server:
+  port: 8100
+
+application:
+  currency-exchange:
+    url: https://prime.exchangerate-api.com/v5/9d6b670179d86419134be353/latest/{from}

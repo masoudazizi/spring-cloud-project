@@ -1,0 +1,115 @@
+version: '3'
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.7.6-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - "TZ=@timezone@"
+    networks:
+      - mobilab-network
+
+  zipkin:
+    image: openzipkin/zipkin-slim
+    container_name: zipkin
+    hostname: zipkin
+    depends_on:
+      - rabbitmq
+    ports:
+      - "9411:9411"
+    environment:
+      - "TZ=@timezone@"
+      - "RABBIT_URI=amqp://guest:guest@rabbitmq:5672"
+    networks:
+      - mobilab-network
+
+  naming-server:
+    image: naming-server
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+    ports:
+      - "8761:8761"
+    networks:
+      - mobilab-network
+
+  config-server:
+    image: config-server
+    ports:
+      - "8888:8888"
+    links:
+      - naming-server
+    networks:
+      - mobilab-network
+
+  gateway:
+    image: gateway
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+    ports:
+      - "8765:8765"
+    depends_on:
+      - naming-server
+      - config-server
+      - zipkin
+    links:
+      - zipkin
+    networks:
+      - mobilab-network
+
+  currency-exchange:
+    image: currency-exchange
+    environment:
+      - JAVA_OPTIONS=-Xmx512m -Xms256m
+    ports:
+      - "8100"
+    depends_on:
+      - naming-server
+      - config-server
+      - gateway
+      - zipkin
+    networks:
+      - mobilab-network
+    links:
+      - zipkin
+
+  account-management:
+    image: account-management
+    environment:
+      - JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://accountmanagement-mariadb:3306/accountmanagement
+      - APP_SLEEP=120 # gives time for mariadb server to start
+    ports:
+      - "8000:8000"
+    depends_on:
+      - naming-server
+      - config-server
+      - gateway
+      - currency-exchange
+      - accountmanagement-mariadb
+      - zipkin
+    links:
+      - zipkin
+    networks:
+      - mobilab-network
+
+  accountmanagement-mariadb:
+    image: mariadb:10.4.12
+    volumes:
+      - ~/volumes/accountManagement/mysql/:/var/lib/mysql/
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=accountmanagement
+    ports:
+      - 3306:3306
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+    networks:
+      - mobilab-network
+
+networks:
+  mobilab-network:
+    driver: bridge

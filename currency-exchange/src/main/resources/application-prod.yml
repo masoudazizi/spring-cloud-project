@@ -1,0 +1,17 @@
+spring:
+  zipkin:
+    baseUrl: http://zipkin:9411
+
+eureka:
+  instance:
+    hostname: currency-exchange
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://naming-server:8761/eureka/
+
+logging:
+  level:
+    ROOT: INFO
+    com.masoud.gateway: INFO

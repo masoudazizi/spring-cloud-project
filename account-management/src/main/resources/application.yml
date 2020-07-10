@@ -1,0 +1,28 @@
+spring:
+  zipkin:
+    baseUrl: http://zipkin:9411
+  profiles:
+    active: @spring.profiles.active@
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+
+server:
+  port: 8000
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+  MaxAutoRetries: 3
+
+feign:
+  hystrix:
+    enabled: true
