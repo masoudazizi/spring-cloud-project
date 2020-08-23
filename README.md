@@ -1,11 +1,7 @@
-# spring-cloud-project
+Account management project with spring cloud
 
-Account management project 
-
-I developed the project with several modules according to the scale up requirement in the description of the project. 
-
-The relations between module in the project were shown at the below picture;
-
+I would like you to develop a simple Account Management Service which will be part of a bigger banking ecosystem. For this project, the variety of Spring Cloud components was used to the ability to scale up the services. 
+The architecture of this project is based on microservice.
 
 
 In the above picture i use three different color for lines that show relation between components:
