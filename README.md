@@ -21,13 +21,10 @@
 
 ##### account-management  available on the port 8000
 
-###### This is the simple account management system. I developed the currency-exchange service for simulating behaviour of  scaling the services, so i used the ribbon technology for client load balancer and feign client to call the exchange service for using in only transfer service, because we need currency exchange only in transfer service. 
+ This is the simple account management system. I developed the currency-exchange service for simulating behaviour of  scaling the services, so i used the ribbon technology for client load balancer and feign client to call the exchange service for using in only transfer service, because we need currency exchange only in transfer service. 
 
 Swagger panel : http://localhost:8000/swagger-ui.html
 
-###### Two services that were mentioned on the project description:
-The first service that you expect was /api/transfer endpoint in account-info-resource.
-The second api that you expect was /api/transaction-logs/{startDate}/{endDate} endpoint that is in transaction-logs-resource to get transaction-logs in the range of date with page and sort options.
 
 ##### currency-exchange available on the port: 8100
 I developed this module for providing a solution of scaling the container, i using the third-party service for getting currency-exchange-rate and unfortunately this third-party api sometimes has problems, please try two times for transfer if you get some problem. it’s related to third-party exchange api.
