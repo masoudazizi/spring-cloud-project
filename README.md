@@ -1,9 +1,6 @@
 ## Account management project 
 
-##### I would like you to develop a simple Account Management Service which will be part of a bigger banking ecosystem. For this project, the variety of Spring Cloud components was used to the ability to scale up the services. 
-##### The architecture of this project is based on microservice.
-
-
+I would like you to develop a simple Account Management Service which will be part of a bigger banking ecosystem. For this project, the variety of Spring Cloud components was used to the ability to scale up the services. The architecture of this project is based on microservice.
 
 
 #### The relations between the modules in the project were shown at the below picture:
